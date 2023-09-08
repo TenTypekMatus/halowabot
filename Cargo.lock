@@ -33,6 +33,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.75"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a4668cab20f66d8d020e1fbc0ebe47217433c1b6c8f2040faf858554e394ace6"
+
+[[package]]
 name = "async-trait"
 version = "0.1.73"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -199,10 +205,6 @@ checksum = "d3dd60d1080a57a05ab032377049e0591415d2b31afd7028356dbf3cc6dcb066"
 dependencies = [
  "generic-array",
 ]
-
-[[package]]
-name = "edupage-api"
-version = "0.1.0"
 
 [[package]]
 name = "encoding_rs"
@@ -382,6 +384,7 @@ dependencies = [
 name = "halowabot"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "serenity",
  "tokio 1.32.0",
 ]

@@ -12,23 +12,31 @@ pub mod commands {
     pub const HELP_HWS: &'static str = "!domaceulohy";
 }
 pub mod functionality {
+    use anyhow::context;
+    use tokio::*;
+    use serenity::{
+        async_trait,
+        model::{channel::Message, gateway::Ready},
+        prelude::*,
+    };
+    use crate::commands::*;
+    pub struct Handler;
     #[async_trait]
     impl EventHandler for Handler {
         async fn message(&self, ctx: Context, msg: Message) {
             if msg.content == HELP_COMMAND {
                 if let Err(why) = msg.channel_id.say(&ctx.http, HELP_MESSAGE).await {
                     println!("Error sending message: {:?}", why);
-                }
+                } // else if msg.context ==  {  }
             }
         }
-        /// Some OOP
         async fn ready(&self, _: Context, ready: Ready) {
             println!("{} is connected!", ready.user.name);
         }
     }
 }
 /// Initialize the bot
-async fn init_the_bot() {
+pub async fn init_the_bot() {
     let token = env::var("DISCORD_TOKEN")
         .expect("Expected a token in the environment");
 
