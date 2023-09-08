@@ -24,7 +24,10 @@ const HELP_MESSAGE: &str = "
           -- Helpbot
 
           ";
-
+/*
+To implement:
+- view command
+*/
 const HELP_COMMAND: &str = "!help";
 
 struct Handler;
