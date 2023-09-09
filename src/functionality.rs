@@ -1,13 +1,13 @@
-pub mod functionality {
+pub mod magic {
+    use crate::{cmd, commands};
     use anyhow::anyhow;
+    use cmd::cmdfunctionality::*;
+    use commands::commands::*;
     use serenity::{
         async_trait,
         model::{channel::Message, gateway::Ready},
         prelude::*,
     };
-    use cmd::cmdfunctionality::*;
-    use crate::{cmd, commands};
-    use commands::commands::*;
     use std::env;
     pub struct Handler;
 
