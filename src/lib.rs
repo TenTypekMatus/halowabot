@@ -32,7 +32,6 @@ pub mod msgs {
 }
 pub mod functionality {
     use anyhow::anyhow;
-    use tokio::*;
     use serenity::{
         async_trait,
         model::{channel::Message, gateway::Ready},
@@ -40,39 +39,44 @@ pub mod functionality {
     };
     use crate::msgs::*;
     use crate::commands::*;
+
     pub struct Handler;
+
     #[async_trait]
     impl EventHandler for Handler {
         async fn message(&self, ctx: Context, msg: Message) {
             if msg.content == VIEW_HELP {
                 if let Err(why) = msg.channel_id.say(&ctx.http, HELP_MSG).await {
                     anyhow!("Error sending message: {:?}", why);
-                }
-                else if msg.content == VIEW_MARKS {
+                } else if msg.content == VIEW_MARKS {
                     if let Err(why) = msg.channel_id.say(&ctx.http, HELP_MSG).await {
                         anyhow!("Error sending message: {:?}", why);
-                    }
-                    else if msg.content == VIEW_MSGS {
+                    } else if msg.content == VIEW_MSGS {
                         if let Err(why) = msg.channel_id.say(&ctx.http, HELP_MSG).await {
                             anyhow!("Error sending message: {:?}", why);
                         }
+                    } else if msg.content == VIEW_TIMETABLE {
+                        if let Err(why) = msg.channel_id.say(&ctx.http, HELP_MSG).await {
+                            anyhow!("Error sending message: {:?}", why);
+                        }
+                    }
                 }
-        }
-        async fn ready(&self, _: Context, ready: Ready) {
-            println!("{} is connected!", ready.user.name);
+            }
+            let ready = |_: Context, ready: Ready| {
+                println!("{} is connected!", ready.user.name);
+            };
         }
     }
 }
 /// Initialize the bot
 pub async fn init_the_bot() {
-    let token = env::var("DISCORD_TOKEN").expect("REASON")
-        .context("Expected a token in the environment");
+    let token = env::var("DISCORD_TOKEN")
+        .expect("Expected a token in the environment");
 
     let mut client = Client::builder(&token)
         .event_handler(Handler)
-        .expect("REASON")
         .await
-        .context("Err creating client");
+        .expect("Err creating client");
 
     if let Err(why) = client.start().await {
         println!("Client error: {:?}", why);
