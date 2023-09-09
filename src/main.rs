@@ -1,3 +1,5 @@
+use halowabot::init_the_bot;
+
 fn main() {
-    todo!();
+    init_the_bot();
 }
